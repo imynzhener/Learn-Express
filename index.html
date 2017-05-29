@@ -23,20 +23,19 @@
         </form>
       </div>
     </div>
-
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+    <script src="public/scripts/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        var socket = io(); // Когда подключу файл socketio.js, то в нем будет ф-я io. Когда я вызвал эту ф-ю, то на сервер отправилось событие connection. На клиенте мы тоже работаем с сокетом
+        var socket = io(); 
 
         $('#user_form').submit(function() {
           if (!$('#user_name').val()) {
             return false;
           }
-          socket.emit('join', $('#user_name').val()); // chat message - название события, которое мы отправляем на сервер. #m - это id формы чата
-          $('#user_name').val(''); // Чистим форму
+
+          socket.emit('join', $('#user_name').val()); 
+          $('#user_name').val('');
 
           $('.user_inner_block').hide();
           $('#message_form').show();
@@ -52,23 +51,16 @@
           if (!$('#message').val()) {
             return false;
           }
-          socket.emit('chat message', $('#message').val()); // chat message - название события, которое мы отправляем на сервер. #m - это id формы чата
-          $('#message').val(''); // Чистим форму
+          
+          socket.emit('chat message', $('#message').val());
+          $('#message').val('');
+
           return false;
         });
 
-        socket.on('chat message', function(user, msg){ // Я говорю, что этим сокетом получаю сообщение. Он сработает тогда, когда сервер сделает socket emmit у себя.
+        socket.on('chat message', function(user, msg) {
           $('#messages').append($('<li>').text(user + ': ' + msg));
         });
-
-
-        // var socket ; // Когда подключу файл socketio.js, то в нем будет ф-я io. Когда я вызвал эту ф-ю, то на сервер отправилось событие connection. На клиенте мы тоже работаем с сокетом
-        // $('#user_connecttion_form').submit(function(){
-        //   socket = io();
-        //   socket.emit('user rconnected', $('#user_input_value').val()); // hat message - название события, которое мы отправляем на сервер. #m - это id формы чата
-        //   $('#user_input_value').val(''); // Чистим или скрываем форму
-        //   return false;
-        // });
 
       });
     </script>
