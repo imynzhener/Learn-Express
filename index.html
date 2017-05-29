@@ -38,13 +38,15 @@
           $('#user_name').val('');
 
           $('.user_inner_block').hide();
+          $('.welcome').hide();
+          $('.chat_progress').show();
           $('#message_form').show();
 
           return false;
         });
 
         socket.on('join', function(name) {
-          $('#messages').append($('<li>').text(name + ' has been connected to chat'));
+          $('#messages').append($('<li>').text(name + ' connected to chat'));
         });
 
         $('#message_form').submit(function() {

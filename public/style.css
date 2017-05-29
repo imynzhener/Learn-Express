@@ -4,16 +4,20 @@
        }
        body {
           font: 13px Helvetica, Arial;
+          margin: 0;
        }
        .message_inner_block form {
           display: none;
           background: #4080FF; padding: 3px; position: fixed; bottom: 0; width: 100%;
        }
        .message_inner_block form input {
-          border: 0; padding: 20px; width: 90%; margin-right: .5%;
+          border: 0; padding: 16px 0px 16px 5px; width: 90%; margin-right: .5%;
        }
        .message_inner_block form button {
-          width: 9%; background: #FFFFFF; border: none; padding: 15px; font-size: 16px; font-weight: bold; border: 1px solid black;
+          width: 8.5%; background: #FFFFFF; border: none; padding: 15px; font-size: 16px; font-weight: bold; border: 1px solid black;
+       }
+       .message_inner_block form button:hover {
+          background-color: lightgrey;
        }
        .user_inner_block {
           padding: 10px;
