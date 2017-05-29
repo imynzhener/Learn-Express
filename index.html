@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="public/style.css">
+  </head>
+  <body>
+    <div id="inner_block">
+      <div class="info_block">
+        <span class="welcome">Wellcome to the messenger!</span>
+        <div class="chat_progress">Chat progress</div>
+      </div>
+      <ul id="messages"></ul>
+      <div class="user_inner_block">
+        <span class="user_name">Enter you user name</span>
+        <form id="user_form" action="">
+          <input id="user_name" autocomplete="off" /><button>Submit</button>
+        </form>
+      </div>
+      <div class="message_inner_block">
+        <form id="message_form" action="">
+          <input id="message" autocomplete="off" /><button>Send</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io(); // Когда подключу файл socketio.js, то в нем будет ф-я io. Когда я вызвал эту ф-ю, то на сервер отправилось событие connection. На клиенте мы тоже работаем с сокетом
+
+        $('#user_form').submit(function() {
+          if (!$('#user_name').val()) {
+            return false;
+          }
+          socket.emit('join', $('#user_name').val()); // chat message - название события, которое мы отправляем на сервер. #m - это id формы чата
+          $('#user_name').val(''); // Чистим форму
+
+          $('.user_inner_block').hide();
+          $('#message_form').show();
+
+          return false;
+        });
+
+        socket.on('join', function(name) {
+          $('#messages').append($('<li>').text(name + ' has been connected to chat'));
+        });
+
+        $('#message_form').submit(function() {
+          if (!$('#message').val()) {
+            return false;
+          }
+          socket.emit('chat message', $('#message').val()); // chat message - название события, которое мы отправляем на сервер. #m - это id формы чата
+          $('#message').val(''); // Чистим форму
+          return false;
+        });
+
+        socket.on('chat message', function(user, msg){ // Я говорю, что этим сокетом получаю сообщение. Он сработает тогда, когда сервер сделает socket emmit у себя.
+          $('#messages').append($('<li>').text(user + ': ' + msg));
+        });
+
+
+        // var socket ; // Когда подключу файл socketio.js, то в нем будет ф-я io. Когда я вызвал эту ф-ю, то на сервер отправилось событие connection. На клиенте мы тоже работаем с сокетом
+        // $('#user_connecttion_form').submit(function(){
+        //   socket = io();
+        //   socket.emit('user rconnected', $('#user_input_value').val()); // hat message - название события, которое мы отправляем на сервер. #m - это id формы чата
+        //   $('#user_input_value').val(''); // Чистим или скрываем форму
+        //   return false;
+        // });
+
+      });
+    </script>
+
+  </body>
+</html>

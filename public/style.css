@@ -1,0 +1,43 @@
+<style>
+       * { 
+          margin: 0; padding: 0; box-sizing: border-box;
+       }
+       body {
+          font: 13px Helvetica, Arial;
+       }
+       .message_inner_block form {
+          display: none;
+          background: #4080FF; padding: 3px; position: fixed; bottom: 0; width: 100%;
+       }
+       .message_inner_block form input {
+          border: 0; padding: 20px; width: 90%; margin-right: .5%;
+       }
+       .message_inner_block form button {
+          width: 9%; background: #FFFFFF; border: none; padding: 15px; font-size: 16px; font-weight: bold; border: 1px solid black;
+       }
+       .user_inner_block {
+          padding: 10px;
+       }
+       .user_inner_block button {
+          padding: 0 10px;
+          margin: 0 5px;
+       }
+       #messages {
+          list-style-type: none; margin: 0; padding: 0;
+       }
+       #messages li {
+          padding: 5px 10px;
+       }
+       #messages li:nth-child(even) {
+          background: lightgrey;
+       }
+       #inner_block {
+          background-color: #FFFFFF;
+       }
+       .info_block {
+          background-color: #4080FF; width: 100%; height: auto; padding: 10px 0; text-align: center; font-style: 14px; margin: 0 auto;
+       }
+       .chat_progress {
+          display: none;
+       }
+    </style>
